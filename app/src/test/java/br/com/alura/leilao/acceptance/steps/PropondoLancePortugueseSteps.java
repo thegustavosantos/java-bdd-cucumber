@@ -4,6 +4,7 @@ import br.com.alura.leilao.model.Lance;
 import br.com.alura.leilao.model.Leilao;
 import br.com.alura.leilao.model.Usuario;
 import ch.qos.logback.core.BasicStatusManager;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +16,8 @@ import org.junit.Assert;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class PropondoLancePortugueseSteps {
 
@@ -29,19 +32,19 @@ public class PropondoLancePortugueseSteps {
     }
 
     @Dado("um lance valido")
-    public void dado_um_lance_valido_pt() {
+    public void dadoUmLanceValido() {
         BigDecimal valor = BigDecimal.TEN;
         Usuario usuario = new Usuario("Fulano");
         this.lance = new Lance(usuario,valor);
     }
 
     @Quando("propoe o lance ao leilao")
-    public void quando_propoe_o_lance_pt() {
+    public void quandoPropoeOLanceAoLeilao() {
         this.leilao.propoe(this.lance);
     }
 
     @Entao("o lance e aceito")
-    public void entao_o_lance_e_aceito_pt() {
+    public void entaoOLanceEhAceito() {
         Assert.assertEquals(1, leilao.getLances().size());
         Assert.assertEquals(BigDecimal.TEN, leilao.getLances().get(0).getValor());
     }
@@ -63,5 +66,40 @@ public class PropondoLancePortugueseSteps {
         Assert.assertEquals(this.lista.get(0).getValor(), leilao.getLances().get(0).getValor());
         Assert.assertEquals(this.lista.get(1).getValor(), leilao.getLances().get(1).getValor());
     }
-    
+
+    @Dado("um lance de {double} reais e do usuario {string}")
+    public void um_lance_de_reais(Double valor, String usuario) {
+        this.lance = new Lance(new BigDecimal(valor));
+        System.out.println(usuario);
+
+    }
+
+    @Entao("o lance nao eh aceito")
+    public void nao_eh_aceito() {
+        Assert.assertEquals(0,this.leilao.getLances().size());
+
+    }
+
+    @Entao("o segundo lance nao eh aceito")
+    public void o_segundo_lance_nao_eh_aceito() {
+        Assert.assertEquals(1, leilao.getLances().size());
+        Assert.assertEquals(this.lista.get(0).getValor(), leilao.getLances().get(0).getValor());
+    }
+
+    @Dado("um dois lances")
+    public void um_dois_lances(DataTable dataTable) {
+
+        List<Map<String, String>> valores = dataTable.asMaps();
+
+        valores.forEach( item -> {
+            String valor = item.get("valor");
+            String usuario = item.get("nomeUsuario");
+            Lance lance = new Lance(new Usuario(usuario), new BigDecimal(valor));
+            this.lista.add(lance);
+
+        });
+
+    }
+
+
 }

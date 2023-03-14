@@ -4,6 +4,9 @@ Referências:
 
     https://cucumber.io/
     https://cucumber.io/docs/cucumber/checking-assertions/
+    
+    Cucumber com Lambda Expression:
+        https://gist.github.com/steppat/64eae8b2005345c71f23b78941bf2a2e
 
 Incluir imagines aqui: 
 
@@ -47,3 +50,21 @@ Incluir imagines aqui:
         - Cucumber possui anotações para inicializar (@Before) e finalizar (@After) o cenários
             - os métodos anotados com @Before e @After são chamados de Hooks
             - cuidado, pois os Hooks não são visíveis no arquivo .feature
+
+04 - DataTables e Exemplos
+
+    O que aprendemos nessa aula:
+        - Como usar Exemplos para alimentar o mesmo teste com dados diferentes
+        - Como usar DataTables para passar vários dados ao teste de uma vez só
+        - Usar o plugin do “Cucumber” no Eclipse
+
+
+
+05 - Integração com Selenium
+
+    O que aprendemos nessa aula:
+        - que PageObject é um padrão de projeto para encapsular o acesso a uma pagina da aplicação
+            - todo o código especifico da interface com Selenium fica dentro do PageObject
+        - não devemos usar Selenium diretamente nas classe de "steps" do Cucumber
+        - o teste, mesmo com Selenium, deve sempre começar a partir de estado "limpo"
+        - a melhor estrategia de buscar um elemento na interface é usar a ID
