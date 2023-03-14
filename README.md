@@ -68,3 +68,11 @@ Incluir imagines aqui:
         - não devemos usar Selenium diretamente nas classe de "steps" do Cucumber
         - o teste, mesmo com Selenium, deve sempre começar a partir de estado "limpo"
         - a melhor estrategia de buscar um elemento na interface é usar a ID
+
+06 - Tags e Contexto
+
+    O que aprendemos nessa aula:
+        - como usar de tags para marcar ou agrupar funcionalidades e cenários
+            - tags podemos ser escolhidas pela anotação @CucumberOptions ou na linha de comando
+    - como definir um contexto (Background) no arquivo .feature
+        - um contexto define um passo comum entre todos os cenários dessa funcionalidade
